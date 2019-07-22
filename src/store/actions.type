@@ -1,0 +1,15 @@
+//auth.js
+export const LOGIN = "login";
+export const LOGOUT = "logout";
+export const REGISTER = "register";
+export const USER_DATA = "getUserData";
+export const SOCIAL_AUTH = "socialAuth";
+//generator.js
+export const MAKE_BET = "makeBet";
+export const GET_HASH = "getHash";
+//lobby.js
+export const GET_DATA_LOBBY = "getDataLobby";
+export const GET_RESULT_LOBBY = "getResultLobby";
+export const CREATE_LOBBY = "createLobby";
+export const CONNECT_LOBBY_BY_ID = "connectLobbyById";
+export const CONNECT_LOBBY = "connectLobby";

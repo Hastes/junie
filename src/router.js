@@ -1,8 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import store from './store/store.js'
 
-Vue.use(Router)
+Vue.use(Router);
+
+
+
+const ifNotAuthenticated = (to, from, next) => {
+   if (!store.getters.isAuthenticated) {
+      next();
+      return
+    }
+    next('/')
+};
+
+// const ifAuthenticated = (to, from, next) => {
+//     if (store.getters.isAuthenticated) {
+//       next();
+//       return
+//     }
+//     next('/login')
+// };
 
 export default new Router({
   mode: 'history',
@@ -11,15 +29,40 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import("@/views/Home")
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import("@/views/auth/Login"),
+      beforeEnter: ifNotAuthenticated
+    },
+    {
+      path: '/login/callback',
+      name: 'callback',
+      props: (route) => ({ query: route.query.q }),
+      component: () => import("@/views/auth/Callback"),
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import("@/views/auth/Register")
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: () => import("@/views/profile/Profile"),
+    },
+    {
+      path: '/lobby/:id',
+      name: 'lobby-detail',
+      component: () => import("@/views/games/lobby/Game"),
+    }
+    ,
+    {
+      path: '/lobby-panel/',
+      name: 'lobby',
+      component: () => import("@/views/games/lobby/Panel"),
     }
   ]
 })

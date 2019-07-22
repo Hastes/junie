@@ -1,0 +1,10 @@
+import BASE_URL from '@/api/config';
+
+const VK_AUTH_PARAMS = {
+    client_id: '6823754',
+    redirect_uri: 'http://192.168.88.21:8080/login/callback/',
+    display: 'popup',
+    v: '5.92'
+};
+
+export default VK_AUTH_PARAMS;
